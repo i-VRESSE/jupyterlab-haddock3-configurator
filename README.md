@@ -1,7 +1,15 @@
 # haddock3_configurator
 
 [![Github Actions Status](https://github.com/i-VRESSE/haddock3-configurator/workflows/Build/badge.svg)](https://github.com/i-VRESSE/haddock3-configurator/actions/workflows/build.yml)[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/i-VRESSE/haddock3-configurator/main?urlpath=lab)
-Edit haddock3 config file
+
+Edit haddock3 config file in Jupyter Lab.
+
+Features:
+
+* Create a new haddock3 config file from the Jupyter Lab launcher
+* Open a haddock3 config file, edit it and save it
+
+![Image](screenshot.png)
 
 ## Requirements
 
