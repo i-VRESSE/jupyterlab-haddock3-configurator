@@ -2,12 +2,14 @@ import React, { useEffect } from 'react';
 import {
   CatalogPanel,
   FormActions,
+  GridArea,
   NodePanel,
-  WorkflowPanel,
+  WorkflowClear,
+  WorkflowPanel
 } from '@i-vresse/wb-core';
 import { useSetCatalog } from '@i-vresse/wb-core/dist/store';
 import { prepareCatalog } from '@i-vresse/wb-core/dist/catalog';
-import "bootstrap/dist/css/bootstrap.min.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import '@i-vresse/wb-form/dist/index.css';
 
 function App(): JSX.Element {
@@ -54,20 +56,24 @@ function App(): JSX.Element {
     setCatalog(prepareCatalog(catalog)); // On mount configure catalog
   }, []);
   return (
-    <table>
-      <tr>
-        <td>
-          <CatalogPanel />
-        </td>
-        <td>
-          <WorkflowPanel />
-        </td>
-        <td style={{ verticalAlign: 'top' }}>
-          <NodePanel />
-          <FormActions />
-        </td>
-      </tr>
-    </table>
+    <div className="page">
+      <GridArea area="catalog">
+        <CatalogPanel />
+      </GridArea>
+      <GridArea area="workflow">
+        <WorkflowPanel />
+      </GridArea>
+      <GridArea area="node">
+        <NodePanel />
+      </GridArea>
+      <GridArea className="action-row" area="workflow-actions">
+        <span>Use ctrl-s to save</span>
+        <WorkflowClear />
+      </GridArea>
+      <GridArea className="action-row" area="node-actions">
+        <FormActions />
+      </GridArea>
+    </div>
   );
 }
 export default App;
