@@ -5,7 +5,7 @@ import {
 
 import { ISettingRegistry } from '@jupyterlab/settingregistry';
 import { ICommandPalette, MainAreaWidget } from '@jupyterlab/apputils';
-import { Widget } from '@lumino/widgets';
+import { Haddock3ConfiguratorWidget } from './widget';
 
 /**
  * Initialization data for the haddock3-configurator extension.
@@ -40,7 +40,7 @@ const plugin: JupyterFrontEndPlugin<void> = {
         });
     }
 
-    const content = new Widget();
+    const content = new Haddock3ConfiguratorWidget();
     const widget = new MainAreaWidget({ content });
     widget.id = 'h3c-jupyterlab';
     widget.title.label = 'Haddock3 config';

@@ -55,6 +55,7 @@
     "watch:labextension": "jupyter labextension watch ."
   },
   "dependencies": {
+    "@i-vresse/wb-core": "^1.0.0",
     "@jupyterlab/application": "^3.4.4",
     "@jupyterlab/apputils": "^3.4.4",
     "@jupyterlab/settingregistry": "^3.1.0"
@@ -65,6 +66,7 @@
     "@jupyterlab/builder": "^3.1.0",
     "@jupyterlab/testutils": "^3.0.0",
     "@types/jest": "^26.0.0",
+    "@types/react": "^17.0.47",
     "@typescript-eslint/eslint-plugin": "^4.8.1",
     "@typescript-eslint/parser": "^4.8.1",
     "eslint": "^7.14.0",
