@@ -1,0 +1,8 @@
+{
+  "jupyter.lab.shortcuts": [],
+  "title": "haddock3-configurator",
+  "description": "haddock3-configurator settings.",
+  "type": "object",
+  "properties": {},
+  "additionalProperties": false
+}

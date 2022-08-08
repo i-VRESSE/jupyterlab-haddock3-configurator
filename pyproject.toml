@@ -1,0 +1,17 @@
+[build-system]
+requires = ["jupyter_packaging~=0.10,<2", "jupyterlab~=3.1"]
+build-backend = "jupyter_packaging.build_api"
+
+[tool.jupyter-packaging.options]
+skip-if-exists = ["haddock3_configurator/labextension/static/style.js"]
+ensured-targets = ["haddock3_configurator/labextension/static/style.js", "haddock3_configurator/labextension/package.json"]
+
+[tool.jupyter-packaging.builder]
+factory = "jupyter_packaging.npm_builder"
+
+[tool.jupyter-packaging.build-args]
+build_cmd = "build:prod"
+npm = ["jlpm"]
+
+[tool.check-manifest]
+ignore = ["haddock3_configurator/labextension/**", "yarn.lock", ".*", "package-lock.json"]
