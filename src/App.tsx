@@ -68,7 +68,6 @@ function App({
 
   const text = useText();
   function onMySave() {
-    debugger
     onSave(text);
   }
 
