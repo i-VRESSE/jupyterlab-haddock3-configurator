@@ -4,6 +4,7 @@ import {
   JupyterFrontEndPlugin
 } from '@jupyterlab/application';
 
+import { ILauncher } from '@jupyterlab/launcher';
 import { ISettingRegistry } from '@jupyterlab/settingregistry';
 import {
   ICommandPalette,
@@ -18,7 +19,8 @@ const activate = (
   app: JupyterFrontEnd,
   palette: ICommandPalette,
   restorer: ILayoutRestorer,
-  settingRegistry: ISettingRegistry | null
+  settingRegistry: ISettingRegistry | null,
+  launcher: ILauncher | null
 ): void => {
   console.log('JupyterLab extension haddock3-configurator is activated!');
   console.log('ICommandPalette:', palette);
@@ -44,7 +46,9 @@ const activate = (
 
   const command = 'h3c:create-new';
   app.commands.addCommand(command, {
-    label: 'Create haddock3 config',
+    label: 'Haddock3 config',
+    iconClass: 'jp-MaterialIcon jp-ListIcon',
+    caption: 'Create a new diagram file',
     execute: () => {
       if (!widget || widget.isDisposed) {
         const content = new Haddock3ConfiguratorWidget();
@@ -80,6 +84,15 @@ const activate = (
     command,
     name: () => 'h3c'
   });
+
+  // Add a launcher item if the launcher is available.
+  if (launcher) {
+    launcher.add({
+      command: 'h3c:create-new',
+      rank: 1,
+      category: 'Other'
+    });
+  }
 };
 
 /**
@@ -88,7 +101,7 @@ const activate = (
 const plugin: JupyterFrontEndPlugin<void> = {
   id: pluginId,
   autoStart: true,
-  optional: [ISettingRegistry],
+  optional: [ISettingRegistry, ILauncher],
   requires: [ICommandPalette, ILayoutRestorer],
   activate
 };

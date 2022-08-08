@@ -59,6 +59,9 @@
     "@i-vresse/wb-core": "^1.0.0",
     "@jupyterlab/application": "^3.4.4",
     "@jupyterlab/apputils": "^3.4.4",
+    "@jupyterlab/docregistry": "^3.4.4",
+    "@jupyterlab/filebrowser": "^3.4.4",
+    "@jupyterlab/launcher": "^3.4.4",
     "@jupyterlab/settingregistry": "^3.1.0"
   },
   "devDependencies": {

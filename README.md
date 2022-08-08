@@ -27,9 +27,8 @@ pip uninstall haddock3_configurator
 
 To open haddock3 configurator widget
 
-1. CTRL-SHIFT-c
-2. Search for `Create haddock3 config`
-3. Press enter
+1. In launcher
+2. Click on `Haddock3 config` in other category
 
 ## Contributing
 
