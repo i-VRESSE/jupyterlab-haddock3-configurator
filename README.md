@@ -23,6 +23,14 @@ To remove the extension, execute:
 pip uninstall haddock3_configurator
 ```
 
+## Usage
+
+To open haddock3 configurator widget
+
+1. CTRL-SHIFT-c
+2. Search for `Create haddock3 config`
+3. Press enter
+
 ## Contributing
 
 ### Development install
@@ -66,12 +74,6 @@ By default, the `jlpm build` command generates the source maps for this extensio
 ```bash
 jupyter lab build --minimize=False
 ```
-
-To open haddock3 configurator widget
-
-1. CTRL-SHIFT-c
-2. Search for `Create haddock3 config`
-3. Press enter
 
 ### Development uninstall
 
