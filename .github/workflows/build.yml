@@ -24,6 +24,7 @@ jobs:
       run: |
         set -eux
         jlpm
+        jlpm prepare:dev
         jlpm run lint:check
     
     - name: Test the extension
