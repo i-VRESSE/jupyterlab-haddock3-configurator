@@ -6,24 +6,63 @@ import {
 
 import { ILauncher } from '@jupyterlab/launcher';
 import { ISettingRegistry } from '@jupyterlab/settingregistry';
-import {
-  ICommandPalette,
-  MainAreaWidget,
-  WidgetTracker
-} from '@jupyterlab/apputils';
-import { Haddock3ConfiguratorWidget } from './widget';
+import { ICommandPalette, WidgetTracker } from '@jupyterlab/apputils';
+import { H3cDocumentWidget } from './widget';
+import { IFileBrowserFactory } from '@jupyterlab/filebrowser';
+import { H3cFactory } from './factory';
 
 const pluginId = 'haddock3-configurator:plugin';
 
+const FACTORY = 'Haddock3 configurator factory';
+
 const activate = (
   app: JupyterFrontEnd,
+  browserFactory: IFileBrowserFactory,
   palette: ICommandPalette,
   restorer: ILayoutRestorer,
   settingRegistry: ISettingRegistry | null,
   launcher: ILauncher | null
 ): void => {
-  console.log('JupyterLab extension haddock3-configurator is activated!');
-  console.log('ICommandPalette:', palette);
+  // Track and restore the widget state
+  const tracker = new WidgetTracker<H3cDocumentWidget>({
+    namespace: 'h3c'
+  });
+
+  if (restorer) {
+    restorer.restore(tracker, {
+      command: 'docmanager:open',
+      args: widget => ({ path: widget.context.path, factory: FACTORY }),
+      name: widget => widget.context.path
+    });
+  }
+
+  const factory = new H3cFactory({
+    name: FACTORY,
+    fileTypes: ['haddock3-config'],
+    defaultFor: ['haddock3-config']
+  });
+
+  factory.widgetCreated.connect((sender, widget) => {
+    widget.title.iconClass = 'jp-MaterialIcon jp-ListIcon';
+
+    // Notify instance tracker if restore data needs to be updated
+    widget.context.pathChanged.connect(() => {
+      tracker.save(widget);
+    });
+    tracker.add(widget);
+  });
+
+  app.docRegistry.addWidgetFactory(factory);
+
+  app.docRegistry.addFileType({
+    name: 'haddock3-config',
+    displayName: 'Haddock3 config',
+    mimeTypes: ['application/zip'],
+    extensions: ['.tomlzip'],
+    iconClass: 'jp-MaterialIcon jp-ListIcon',
+    fileFormat: 'json',
+    contentType: 'directory'
+  });
 
   if (settingRegistry) {
     settingRegistry
@@ -42,48 +81,29 @@ const activate = (
       });
   }
 
-  let widget: MainAreaWidget<Haddock3ConfiguratorWidget>;
-
   const command = 'h3c:create-new';
   app.commands.addCommand(command, {
     label: 'Haddock3 config',
     iconClass: 'jp-MaterialIcon jp-ListIcon',
     caption: 'Create a new diagram file',
     execute: () => {
-      if (!widget || widget.isDisposed) {
-        const content = new Haddock3ConfiguratorWidget();
-        widget = new MainAreaWidget({ content });
-        widget.id = 'h3c-jupyterlab';
-        widget.title.label = 'Haddock3 config';
-        widget.title.closable = true;
-      }
-      if (!tracker.has(widget)) {
-        // Track the state of the widget for later restoration
-        tracker.add(widget);
-      }
-      if (!widget.isAttached) {
-        // Attach the widget to the main work area if it's not there
-        app.shell.add(widget, 'main');
-      }
-      widget.content.update();
-
-      // Activate the widget
-      app.shell.activateById(widget.id);
+      const cwd = browserFactory.defaultBrowser.model.path;
+      app.commands
+        .execute('docmanager:new-untitled', {
+          path: cwd,
+          type: 'file',
+          ext: '.tomlzip'
+        })
+        .then(model =>
+          app.commands.execute('docmanager:open', {
+            path: model.path,
+            factory: FACTORY
+          })
+        );
     }
   });
 
   palette.addItem({ command, category: 'Haddock3' });
-
-  // Track and restore the widget state
-  const tracker = new WidgetTracker<MainAreaWidget<Haddock3ConfiguratorWidget>>(
-    {
-      namespace: 'h3c'
-    }
-  );
-  restorer.restore(tracker, {
-    command,
-    name: () => 'h3c'
-  });
 
   // Add a launcher item if the launcher is available.
   if (launcher) {
@@ -102,7 +122,7 @@ const plugin: JupyterFrontEndPlugin<void> = {
   id: pluginId,
   autoStart: true,
   optional: [ISettingRegistry, ILauncher],
-  requires: [ICommandPalette, ILayoutRestorer],
+  requires: [IFileBrowserFactory, ICommandPalette, ILayoutRestorer],
   activate
 };
 

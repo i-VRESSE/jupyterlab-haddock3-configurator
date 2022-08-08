@@ -7,12 +7,22 @@ import {
   WorkflowClear,
   WorkflowPanel
 } from '@i-vresse/wb-core';
-import { useSetCatalog } from '@i-vresse/wb-core/dist/store';
+import {
+  useSetCatalog,
+  useText,
+  useWorkflow
+} from '@i-vresse/wb-core/dist/store';
 import { prepareCatalog } from '@i-vresse/wb-core/dist/catalog';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@i-vresse/wb-form/dist/index.css';
 
-function App(): JSX.Element {
+function App({
+  onSave,
+  content
+}: {
+  onSave: (content: string) => void;
+  content: any;
+}): JSX.Element {
   const setCatalog = useSetCatalog();
   useEffect(() => {
     const catalog = {
@@ -55,6 +65,21 @@ function App(): JSX.Element {
     };
     setCatalog(prepareCatalog(catalog)); // On mount configure catalog
   }, []);
+
+  const text = useText();
+  function onMySave() {
+    debugger
+    onSave(text);
+  }
+
+  const { loadWorkflowArchive } = useWorkflow();
+  useEffect(() => {
+    if (content) {
+      debugger
+      loadWorkflowArchive(content);
+    }
+  }, [content]);
+
   return (
     <div className="page">
       <GridArea area="catalog">
@@ -67,7 +92,7 @@ function App(): JSX.Element {
         <NodePanel />
       </GridArea>
       <GridArea className="action-row" area="workflow-actions">
-        <span>Use ctrl-s to save</span>
+        <button onClick={onMySave}>Save</button>
         <WorkflowClear />
       </GridArea>
       <GridArea className="action-row" area="node-actions">
