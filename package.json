@@ -35,7 +35,7 @@
     "build:labextension:dev": "jupyter labextension build --development True .",
     "build:lib": "tsc",
     "clean": "jlpm clean:lib",
-    "clean:lib": "rimraf lib tsconfig.tsbuildinfo",
+    "clean:lib": "rimraf lib tsconfig.tsbuildinfo && jlpm prepare:dev",
     "clean:lintcache": "rimraf .eslintcache .stylelintcache",
     "clean:labextension": "rimraf haddock3_configurator/labextension",
     "clean:all": "jlpm clean:lib && jlpm clean:labextension && jlpm clean:lintcache",
