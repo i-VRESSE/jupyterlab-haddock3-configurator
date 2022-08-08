@@ -52,7 +52,8 @@
     "test": "jest --coverage",
     "watch": "run-p watch:src watch:labextension",
     "watch:src": "tsc -w",
-    "watch:labextension": "jupyter labextension watch ."
+    "watch:labextension": "jupyter labextension watch .",
+    "prepare:dev": "rm -f node_modules/@jupyterlab/ui-components/node_modules/@rjsf/core/index.d.ts && mkdir -p catalog && touch catalog/index.json node_modules/pdbtbx_ts_bg.wasm"
   },
   "dependencies": {
     "@i-vresse/wb-core": "^1.0.0",

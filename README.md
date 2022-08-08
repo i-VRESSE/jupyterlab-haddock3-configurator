@@ -40,6 +40,12 @@ The `jlpm` command is JupyterLab's pinned version of
 pip install -e .
 # Link your development version of the extension with JupyterLab
 jupyter labextension develop . --overwrite
+# @i-vresse/wb-form needs @rjsf/core" "^4.2.2
+# @jupyterlab/ui-components needs @rjsf/core" "^3.1.0"
+# This gives Typescript conflig so drop older d.ts file
+# vite defers `import.meta.url` till runtime, but webpack gives build error so create dummy files
+jlpm prepare:dev
+
 # Rebuild extension Typescript source after making changes
 jlpm build
 ```
@@ -60,6 +66,12 @@ By default, the `jlpm build` command generates the source maps for this extensio
 ```bash
 jupyter lab build --minimize=False
 ```
+
+To open haddock3 configurator widget
+
+1. CTRL-SHIFT-c
+2. Search for `Create haddock3 config`
+3. Press enter
 
 ### Development uninstall
 

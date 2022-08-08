@@ -117,3 +117,5 @@ dmypy.json
 # OSX files
 .DS_Store
 env
+catalog
+yarn-error.log
