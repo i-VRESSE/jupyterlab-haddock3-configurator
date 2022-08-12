@@ -15,20 +15,21 @@ export class Haddock3ConfiguratorWidget extends ReactWidget {
   constructor(context: DocumentRegistry.IContext<DocumentModel>) {
     super();
     this._context = context;
+    this._context.ready.then(value => {
+      this.update();
+    });
   }
 
   render(): JSX.Element {
-    console.log(this._context);
     const context = this._context;
 
     function onSave(content: string) {
-      debugger
       context.model.fromString(content);
     }
-
+    const bodyCfg = context.model.toString();
     return (
       <Wrapper>
-        <App onSave={onSave} content={context.model.toString()} />
+        <App onSave={onSave} content={bodyCfg} />
       </Wrapper>
     );
   }

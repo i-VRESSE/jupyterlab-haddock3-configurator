@@ -52,6 +52,7 @@ The `jlpm` command is JupyterLab's pinned version of
 # Clone the repo to your local environment
 # Change directory to the haddock3_configurator directory
 # Install package in development mode
+pip install jupyterlab
 pip install -e .
 # Link your development version of the extension with JupyterLab
 jupyter labextension develop . --overwrite
@@ -60,6 +61,7 @@ jupyter labextension develop . --overwrite
 # This gives Typescript conflig so drop older d.ts file
 # vite defers `import.meta.url` till runtime, but webpack gives build error so create dummy files
 jlpm prepare:dev
+# You might need to re-run pip install again
 
 # Rebuild extension Typescript source after making changes
 jlpm build
