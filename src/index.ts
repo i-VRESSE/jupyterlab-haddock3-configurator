@@ -41,6 +41,7 @@ const activate = (
     fileTypes: ['haddock3-config'],
     defaultFor: ['haddock3-config']
   });
+  factory.setManager(browserFactory.defaultBrowser.model.manager);
 
   factory.widgetCreated.connect((sender, widget) => {
     widget.title.iconClass = 'jp-MaterialIcon jp-ListIcon';
