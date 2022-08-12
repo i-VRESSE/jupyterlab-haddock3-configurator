@@ -6,8 +6,8 @@ Edit haddock3 config file in Jupyter Lab.
 
 Features:
 
-* Create a new haddock3 config file from the Jupyter Lab launcher
-* Open a haddock3 config file, edit it and save it
+- Create a new haddock3 config file from the Jupyter Lab launcher
+- Open a haddock3 config file, edit it and save it
 
 ![Image](screenshot.png)
 
