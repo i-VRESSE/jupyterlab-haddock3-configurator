@@ -15,6 +15,9 @@ import {
 import { prepareCatalog } from '@i-vresse/wb-core/dist/catalog';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@i-vresse/wb-form/dist/index.css';
+// This file copied from https://github.com/i-VRESSE/workflow-builder/blob/main/packages/haddock3_catalog/public/catalog/haddock3.guru.yaml
+// then was converted from yaml to json and its example entry removed
+import catalog from './haddock3.guru.json';
 
 function App({
   onSave,
@@ -25,44 +28,6 @@ function App({
 }): JSX.Element {
   const setCatalog = useSetCatalog();
   useEffect(() => {
-    const catalog = {
-      title: 'Some title',
-      global: {
-        schema: {
-          type: 'object',
-          properties: {
-            parameterY: {
-              type: 'string'
-            }
-          }
-        },
-        uiSchema: {}
-      },
-      categories: [
-        {
-          name: 'cat1',
-          description: 'First category'
-        }
-      ],
-      nodes: [
-        {
-          category: 'cat1',
-          description: 'Description of somenode',
-          id: 'somenode',
-          label: 'Some node',
-          schema: {
-            type: 'object',
-            properties: {
-              parameterX: {
-                type: 'string'
-              }
-            }
-          },
-          uiSchema: {}
-        }
-      ],
-      examples: {}
-    };
     setCatalog(prepareCatalog(catalog)); // On mount configure catalog
   }, []);
 

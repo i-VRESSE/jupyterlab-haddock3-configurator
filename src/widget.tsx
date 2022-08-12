@@ -28,7 +28,7 @@ export class Haddock3ConfiguratorWidget extends ReactWidget {
 
     return (
       <Wrapper>
-        <App onSave={onSave} content={context.model.toJSON()} />
+        <App onSave={onSave} content={context.model.toString()} />
       </Wrapper>
     );
   }

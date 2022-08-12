@@ -1167,17 +1167,17 @@
   resolved "https://registry.yarnpkg.com/@i-vresse/pdbtbx-ts/-/pdbtbx-ts-0.1.7.tgz#164554ea02d8521baf3ae709c2f079aa61853df9"
   integrity sha512-8lNJXyMB79jGlBVcoOFTyJ5Q4TmawT4y7/ln/AL+7jT2NHHSfcyFnQooSdM+S83qOSVYM2ruWwZNeLvoz8qj1A==
 
-"@i-vresse/wb-core@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@i-vresse/wb-core/-/wb-core-1.0.0.tgz#0d8291041aa6d5e3cf58b13714479c55e9d3702e"
-  integrity sha512-QtzRYLT0VeVXt3NU4RFolHrPgiGFHPQ6ePMZ1x56SiNLUuTuCkoymwR/6StGlkEelUH+ukQNWcpS3otqs1yN4w==
+"@i-vresse/wb-core@^1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@i-vresse/wb-core/-/wb-core-1.1.1.tgz#cf167bfb696622c38a9071b1cb60f5fce51d6889"
+  integrity sha512-xbHxHi1sVhsrVaWblUnvU1+RmbuZ2nXxa8OquVuKoi6gcYGNi+S7YTu07EYWfLijFc/IEHtOidhVonWOLqaMeA==
   dependencies:
     "@dnd-kit/core" "^6.0.5"
     "@dnd-kit/modifiers" "^6.0.0"
     "@dnd-kit/sortable" "^7.0.1"
     "@emotion/react" "^11.9.3"
     "@i-vresse/pdbtbx-ts" "0.1.7"
-    "@i-vresse/wb-form" "^1.0.0"
+    "@i-vresse/wb-form" "^1.1.1"
     "@ltd/j-toml" "^1.24.0"
     "@zip.js/zip.js" "^2.3.23"
     ajv "^8.9.0"
@@ -1195,10 +1195,10 @@
     recoil "^0.5.2"
     web-encoding "^1.1.5"
 
-"@i-vresse/wb-form@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@i-vresse/wb-form/-/wb-form-1.0.0.tgz#e3c03012cc0111ecfe4348c876a606dadcca3944"
-  integrity sha512-QrrWVK/ym1qzJ7eUc9HnTcyEpdPLs0StSTxueT9uoY4QjPSl6iZ97xhn9gcgozVfY2y8JZj/LA27Aj/huX3Z4w==
+"@i-vresse/wb-form@^1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@i-vresse/wb-form/-/wb-form-1.1.1.tgz#ef16da9ae251b85b0d443435e2e1fa6fcdfcf35a"
+  integrity sha512-fNXvGRnEV7TJNJ235swyOWP18yyupuPTLWgi8AHbltaKn8WzJITB9KG2l8UNJIfQ3bch+8b6gb9jnt6l2IsnjQ==
   dependencies:
     "@rjsf/bootstrap-4" "^4.2.2"
     "@rjsf/core" "^4.2.2"

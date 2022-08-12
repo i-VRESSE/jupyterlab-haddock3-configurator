@@ -57,11 +57,12 @@ const activate = (
   app.docRegistry.addFileType({
     name: 'haddock3-config',
     displayName: 'Haddock3 config',
-    mimeTypes: ['application/zip'],
-    extensions: ['.tomlzip'],
+    mimeTypes: ['text/plain'],
+    pattern: '.cfg$',
+    extensions: ['.cfg'],
     iconClass: 'jp-MaterialIcon jp-ListIcon',
-    fileFormat: 'json',
-    contentType: 'directory'
+    fileFormat: 'text',
+    contentType: 'file'
   });
 
   if (settingRegistry) {
@@ -85,14 +86,14 @@ const activate = (
   app.commands.addCommand(command, {
     label: 'Haddock3 config',
     iconClass: 'jp-MaterialIcon jp-ListIcon',
-    caption: 'Create a new diagram file',
+    caption: 'Create a new config file',
     execute: () => {
       const cwd = browserFactory.defaultBrowser.model.path;
       app.commands
         .execute('docmanager:new-untitled', {
           path: cwd,
           type: 'file',
-          ext: '.tomlzip'
+          ext: '.cfg'
         })
         .then(model =>
           app.commands.execute('docmanager:open', {
