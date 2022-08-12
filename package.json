@@ -53,7 +53,8 @@
     "watch": "run-p watch:src watch:labextension",
     "watch:src": "tsc -w",
     "watch:labextension": "jupyter labextension watch .",
-    "prepare:dev": "rm -f node_modules/@jupyterlab/ui-components/node_modules/@rjsf/core/index.d.ts && mkdir -p catalog && touch catalog/index.json node_modules/pdbtbx_ts_bg.wasm"
+    "prepare:dev": "rm -f node_modules/@jupyterlab/ui-components/node_modules/@rjsf/core/index.d.ts && mkdir -p catalog && touch catalog/index.json node_modules/pdbtbx_ts_bg.wasm",
+    "catalog:sync": "curl -L 'https://github.com/i-VRESSE/workflow-builder/raw/main/packages/haddock3_catalog/public/catalog/haddock3.guru.yaml' | npx --package @jobscale/yaml-js js-yaml > src/haddock3.guru.json"
   },
   "dependencies": {
     "@i-vresse/wb-core": "^1.1.1",
