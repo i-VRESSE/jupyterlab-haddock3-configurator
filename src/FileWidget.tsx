@@ -24,7 +24,7 @@ export const FileWidget: React.FC<WidgetProps> = props => {
 
   return (
     <div>
-      <button className="btn" onClick={e => handleClick(e)}>
+      <button className="btn btn-light" onClick={e => handleClick(e)}>
         Choose file
       </button>
       {props.value}
