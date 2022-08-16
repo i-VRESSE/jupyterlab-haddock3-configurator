@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { IDocumentManager } from '@jupyterlab/docmanager';
 import {
   CatalogPanel,
   FormActions,
@@ -27,16 +26,14 @@ import '@i-vresse/wb-form/dist/index.css';
 // then was converted from yaml to json and its example entry removed
 import catalogJSON from './haddock3.guru.json';
 import { TomlObjectSchema } from '@i-vresse/wb-core/dist/types';
-import { FileDialog } from '@jupyterlab/filebrowser';
+import { FileWidget } from './FileWidget';
 
 function App({
   onSave,
-  content,
-  manager
+  content
 }: {
   onSave: (content: string) => void;
   content: string;
-  manager: IDocumentManager;
 }): JSX.Element {
   const setCatalog = useSetCatalog();
   useEffect(() => {
@@ -85,26 +82,10 @@ function App({
         <CatalogPanel />
       </GridArea>
       <GridArea area="workflow">
-        <button
-          className="btn"
-          onClick={async () => {
-            const { value: files } = await FileDialog.getOpenFiles({ manager });
-            console.log(files);
-            if (files === null || files.length !== 1) {
-              return;
-            }
-            const file = files[0];
-            setGlobal({ molecules: [file.path], run_dir: 'x' });
-            // TODO in https://github.com/i-VRESSE/workflow-builder/blob/main/packages/core/src/dataurls.ts#L16
-            // allow bla.pdb to be valid
-          }}
-        >
-          Upload data file
-        </button>
         <WorkflowPanel />
       </GridArea>
       <GridArea area="node">
-        <NodePanel />
+        <NodePanel widgets={{ FileWidget }} />
       </GridArea>
       <GridArea className="action-row" area="workflow-actions">
         <button className="btn btn-primary" onClick={onMySave}>

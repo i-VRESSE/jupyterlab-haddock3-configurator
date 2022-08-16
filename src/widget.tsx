@@ -10,6 +10,7 @@ import {
 import { IDocumentManager } from '@jupyterlab/docmanager';
 
 import App from './App';
+import { DocManagerContext } from './DocManagerContext';
 
 export class Haddock3ConfiguratorWidget extends ReactWidget {
   private _context: DocumentRegistry.IContext<DocumentModel>;
@@ -36,7 +37,9 @@ export class Haddock3ConfiguratorWidget extends ReactWidget {
     const bodyCfg = context.model.toString();
     return (
       <Wrapper>
-        <App onSave={onSave} content={bodyCfg} manager={this._manager}/>
+        <DocManagerContext.Provider value={this._manager}>
+          <App onSave={onSave} content={bodyCfg} />
+        </DocManagerContext.Provider>
       </Wrapper>
     );
   }
