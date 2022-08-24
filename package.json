@@ -57,7 +57,7 @@
     "catalog:sync": "curl -L 'https://github.com/i-VRESSE/workflow-builder/raw/main/packages/haddock3_catalog/public/catalog/haddock3.guru.yaml' | npx --package @jobscale/yaml-js js-yaml > src/haddock3.guru.json"
   },
   "dependencies": {
-    "@i-vresse/wb-core": "^1.1.1",
+    "@i-vresse/wb-core": "^1.1.2",
     "@jupyterlab/application": "^3.4.4",
     "@jupyterlab/apputils": "^3.4.4",
     "@jupyterlab/docregistry": "^3.4.4",
