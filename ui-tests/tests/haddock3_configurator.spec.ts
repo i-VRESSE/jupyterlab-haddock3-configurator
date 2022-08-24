@@ -6,18 +6,9 @@ import { expect, test } from '@jupyterlab/galata';
  */
 test.use({ autoGoto: false });
 
-test('should emit an activation console message', async ({ page }) => {
-  const logs: string[] = [];
-
-  page.on('console', message => {
-    logs.push(message.text());
-  });
-
+test('should have launch button', async ({ page }) => {
   await page.goto();
 
-  expect(
-    logs.filter(
-      s => s === 'JupyterLab extension haddock3-configurator is activated!'
-    )
-  ).toHaveLength(1);
+  const launcherButton = page.locator('p:has-text("Haddock3 config")')
+  expect(await launcherButton.isVisible()).toBeTruthy();
 });
