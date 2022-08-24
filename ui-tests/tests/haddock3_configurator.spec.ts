@@ -9,6 +9,6 @@ test.use({ autoGoto: false });
 test('should have launch button', async ({ page }) => {
   await page.goto();
 
-  const launcherButton = page.locator('p:has-text("Haddock3 config")')
+  const launcherButton = page.locator('p:has-text("Haddock3 config")');
   expect(await launcherButton.isVisible()).toBeTruthy();
 });
