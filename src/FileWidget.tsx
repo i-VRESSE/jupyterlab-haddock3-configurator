@@ -1,8 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { WidgetProps } from '@rjsf/core';
+import { WidgetProps, Widget, utils } from '@rjsf/core';
 import { FileDialog } from '@jupyterlab/filebrowser';
 import { DocManagerContext } from './DocManagerContext';
-import { utils } from '@rjsf/core';
 import { Contents } from '@jupyterlab/services';
 import { dataURL2filename } from '@i-vresse/wb-core/dist/dataurls';
 
@@ -28,7 +27,7 @@ function processBlob(blob: Blob): Promise<string> {
   });
 }
 
-export const FileWidget: React.FC<WidgetProps> = props => {
+export const FileWidget: Widget = props => {
   const [name, setName] = useState(props.value as string);
   const manager = useContext(DocManagerContext);
   const { uiSchema } = props;
