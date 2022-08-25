@@ -1,7 +1,7 @@
 {
-  "name": "haddock3-configurator-ui-tests",
+  "name": "jupyterlab-haddock3-configurator-ui-tests",
   "version": "1.0.0",
-  "description": "JupyterLab haddock3-configurator Integration Tests",
+  "description": "JupyterLab jupyterlab-haddock3-configurator Integration Tests",
   "private": true,
   "scripts": {
     "start": "jupyter lab --config jupyter_server_test_config.py",

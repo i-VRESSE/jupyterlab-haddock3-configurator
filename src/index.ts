@@ -11,7 +11,7 @@ import { H3cDocumentWidget } from './widget';
 import { IFileBrowserFactory } from '@jupyterlab/filebrowser';
 import { H3cFactory } from './factory';
 
-const pluginId = 'haddock3-configurator:plugin';
+const pluginId = 'jupyterlab-haddock3-configurator:plugin';
 
 const FACTORY = 'Haddock3 configurator factory';
 
@@ -71,13 +71,13 @@ const activate = (
       .load(pluginId)
       .then(settings => {
         console.log(
-          'haddock3-configurator settings loaded:',
+          'jupyterlab-haddock3-configurator settings loaded:',
           settings.composite
         );
       })
       .catch(reason => {
         console.error(
-          'Failed to load settings for haddock3-configurator.',
+          'Failed to load settings for jupyterlab-haddock3-configurator.',
           reason
         );
       });
@@ -118,7 +118,7 @@ const activate = (
 };
 
 /**
- * Initialization data for the haddock3-configurator extension.
+ * Initialization data for the jupyterlab-haddock3-configurator extension.
  */
 const plugin: JupyterFrontEndPlugin<void> = {
   id: pluginId,

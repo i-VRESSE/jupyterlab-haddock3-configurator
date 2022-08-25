@@ -1,6 +1,6 @@
 # haddock3_configurator
 
-[![Github Actions Status](https://github.com/i-VRESSE/haddock3-configurator/workflows/Build/badge.svg)](https://github.com/i-VRESSE/haddock3-configurator/actions/workflows/build.yml)[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/i-VRESSE/haddock3-configurator/main?urlpath=lab)
+[![Github Actions Status](https://github.com/i-VRESSE/jupyterlab-haddock3-configurator/workflows/Build/badge.svg)](https://github.com/i-VRESSE/jupyterlab-haddock3-configurator/actions/workflows/build.yml)[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/i-VRESSE/jupyterlab-haddock3-configurator/main?urlpath=lab)
 
 Edit haddock3 config file in Jupyter Lab.
 
@@ -92,7 +92,7 @@ pip uninstall haddock3_configurator
 
 In development mode, you will also need to remove the symlink created by `jupyter labextension develop`
 command. To find its location, you can run `jupyter labextension list` to figure out where the `labextensions`
-folder is located. Then you can remove the symlink named `haddock3-configurator` within that folder.
+folder is located. Then you can remove the symlink named `jupyterlab-haddock3-configurator` within that folder.
 
 ### Testing the extension
 
