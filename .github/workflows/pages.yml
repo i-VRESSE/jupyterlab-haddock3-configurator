@@ -1,0 +1,89 @@
+name: Pages
+
+on:
+  push:
+    branches: main
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow one concurrent deployment
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  build-extension:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Base Setup
+      uses: jupyterlab/maintainer-tools/.github/actions/base-setup@v1
+      env:
+        NODE_VERSION: '18.x'
+
+    - name: Install dependencies
+      run: python -m pip install -U jupyterlab~=3.1
+
+    - name: Build the extension
+      run: |
+        set -eux
+        jlpm
+        jlpm prepare:dev
+        jlpm build:prod
+
+
+    - name: Package the extension
+      run: |
+        set -eux
+        pip install build
+        python -m build
+
+    - name: Upload extension packages
+      uses: actions/upload-artifact@v2
+      with:
+        name: extension-artifacts
+        path: dist/haddock3_configurator*
+        if-no-files-found: error
+
+  build-lite:
+    needs: build-extension
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+      - name: Install the dependencies
+        run: |
+          python -m pip install -r lite/requirements.txt
+      - uses: actions/download-artifact@v2
+        with:
+          name: extension-artifacts
+      - name: Install extension
+        run: |
+          pip install haddock3_configurator*.whl
+      - name: Build the JupyterLite site
+        run: |
+          cd lite
+          jupyter lite build --contents content --output-dir ../_site
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: _site/
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@main
