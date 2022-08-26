@@ -9,6 +9,11 @@ Features:
 - Create a new haddock3 config file from the Jupyter Lab launcher
 - Open a haddock3 config file, edit it and save it
 
+Quirks:
+
+- Opening existing config file will not parse PDB files so parameters which are molecule aware are empty
+- To save press save button followed by CTRL-s
+
 ![Image](screenshot.png)
 
 ## Requirements

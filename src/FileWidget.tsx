@@ -4,29 +4,7 @@ import { FileDialog } from '@jupyterlab/filebrowser';
 import { FileWidgetContext } from './FileWidgetContext';
 import { Contents } from '@jupyterlab/services';
 import { dataURL2filename } from '@i-vresse/wb-core/dist/dataurls';
-import { URLExt } from '@jupyterlab/coreutils';
-
-function addNameToDataURL(dataURL: string, name: string) {
-  return dataURL.replace(';base64', `;name=${encodeURIComponent(name)};base64`);
-}
-
-function processBlob(blob: Blob): Promise<string> {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onerror = reject;
-    reader.onload = event => {
-      if (
-        event.target === null ||
-        event.target.result === null ||
-        event.target.result instanceof ArrayBuffer
-      ) {
-        return reject(event.target);
-      }
-      resolve(event.target.result);
-    };
-    reader.readAsDataURL(blob);
-  });
-}
+import { ContentsManager } from '@jupyterlab/services';
 
 export const FileWidget: Widget = props => {
   const [name, setName] = useState(props.value as string);
@@ -41,7 +19,7 @@ export const FileWidget: Widget = props => {
     if (context === undefined) {
       return;
     }
-    const { manager, baseUrl } = context;
+    const { manager } = context;
 
     const filter = dialogFilter(uiSchema);
     const { value: files } = await FileDialog.getOpenFiles({ manager, filter });
@@ -49,7 +27,7 @@ export const FileWidget: Widget = props => {
       return;
     }
     const file = files[0];
-    const dataUrl = await file2dataurl(file.path, baseUrl);
+    const dataUrl = await path2dataurl(file.path);
     props.onChange(dataUrl);
   }
 
@@ -57,28 +35,37 @@ export const FileWidget: Widget = props => {
     if (props.value === undefined) {
       setName('');
     } else {
-      const newName = dataURL2filename(props.value);
-      setName(newName);
+      if (props.value.startsWith('data:')) {
+        const newName = dataURL2filename(props.value);
+        setName(newName);
+      } else {
+        setName(props.value);
+      }
     }
   }, [props.value]);
 
   return (
     <div>
-      <button className="btn btn-light" onClick={e => handleClick(e)}>
+      <button
+        type="button"
+        className="btn btn-light"
+        onClick={e => handleClick(e)}
+      >
         Choose file
       </button>
       {name}
     </div>
   );
 };
-async function file2dataurl(path: string, baseUrl: string) {
-  // TODO current url expects Jupyter Lab to run at /, should be more generic
-  const url = URLExt.join(baseUrl, 'files', path);
-  const resp = await fetch(url);
-  const blob = await resp.blob();
-  const dataUrl = await processBlob(blob);
-  const namedDataUrl = addNameToDataURL(dataUrl, path);
-  return namedDataUrl;
+async function path2dataurl(path: string) {
+  const contents = new ContentsManager();
+  const file = await contents.get(path);
+  if (file.type === 'file' && file.format === 'text') {
+    const content64 = btoa(file.content);
+    const dataUrl = `data:${file.mimetype};name=${path};base64,${content64}`;
+    return dataUrl;
+  }
+  return path;
 }
 
 function dialogFilter(uiSchema: WidgetProps['uiSchema']) {

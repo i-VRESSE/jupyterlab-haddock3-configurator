@@ -15,17 +15,14 @@ import { FileWidgetContext } from './FileWidgetContext';
 export class Haddock3ConfiguratorWidget extends ReactWidget {
   private _context: DocumentRegistry.IContext<DocumentModel>;
   private _manager: IDocumentManager;
-  private _baseUrl = '';
 
   constructor(
     context: DocumentRegistry.IContext<DocumentModel>,
-    manager: IDocumentManager,
-    baseUrl: string
+    manager: IDocumentManager
   ) {
     super();
     this._context = context;
     this._manager = manager;
-    this._baseUrl = baseUrl;
     this._context.ready.then(value => {
       this.update();
     });
@@ -39,8 +36,7 @@ export class Haddock3ConfiguratorWidget extends ReactWidget {
     }
     const bodyCfg = context.model.toString();
     const contextValue = {
-      manager: this._manager,
-      baseUrl: this._baseUrl
+      manager: this._manager
     };
     return (
       <Wrapper>

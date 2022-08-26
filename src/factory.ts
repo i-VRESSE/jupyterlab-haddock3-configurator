@@ -11,7 +11,6 @@ export class H3cFactory extends ABCWidgetFactory<
   DocumentRegistry.IModel
 > {
   private _manager: IDocumentManager | undefined = undefined;
-  private _baseUrl = '';
 
   protected createNewWidget(
     context: DocumentRegistry.IContext<DocumentModel>
@@ -23,17 +22,12 @@ export class H3cFactory extends ABCWidgetFactory<
       context,
       content: new Haddock3ConfiguratorWidget(
         context,
-        this._manager,
-        this._baseUrl
+        this._manager
       )
     });
   }
 
   setManager(newManager: IDocumentManager): void {
     this._manager = newManager;
-  }
-
-  setBaseUrl(newBaseUrl: string): void {
-    this._baseUrl = newBaseUrl;
   }
 }
