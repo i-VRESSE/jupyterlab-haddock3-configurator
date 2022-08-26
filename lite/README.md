@@ -6,7 +6,7 @@ This will run extension without a server backend, just hosting of static files w
 
 ## Build
 
-First build extension with 
+First build extension with
 
 ```shell
 jlpm build:prod
