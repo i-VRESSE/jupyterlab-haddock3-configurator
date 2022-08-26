@@ -16,6 +16,8 @@ Quirks:
 
 ![Image](screenshot.png)
 
+See running in JupyterLite at [https://i-vresse.github.io/jupyterlab-haddock3-configurator/](https://i-vresse.github.io/jupyterlab-haddock3-configurator/).
+
 ## Requirements
 
 - JupyterLab >= 3.0
