@@ -10,19 +10,22 @@ import {
 import { IDocumentManager } from '@jupyterlab/docmanager';
 
 import App from './App';
-import { DocManagerContext } from './DocManagerContext';
+import { FileWidgetContext } from './FileWidgetContext';
 
 export class Haddock3ConfiguratorWidget extends ReactWidget {
   private _context: DocumentRegistry.IContext<DocumentModel>;
   private _manager: IDocumentManager;
+  private _baseUrl = '';
 
   constructor(
     context: DocumentRegistry.IContext<DocumentModel>,
-    manager: IDocumentManager
+    manager: IDocumentManager,
+    baseUrl: string
   ) {
     super();
     this._context = context;
     this._manager = manager;
+    this._baseUrl = baseUrl;
     this._context.ready.then(value => {
       this.update();
     });
@@ -35,11 +38,15 @@ export class Haddock3ConfiguratorWidget extends ReactWidget {
       context.model.fromString(content);
     }
     const bodyCfg = context.model.toString();
+    const contextValue = {
+      manager: this._manager,
+      baseUrl: this._baseUrl
+    };
     return (
       <Wrapper>
-        <DocManagerContext.Provider value={this._manager}>
+        <FileWidgetContext.Provider value={contextValue}>
           <App onSave={onSave} content={bodyCfg} />
-        </DocManagerContext.Provider>
+        </FileWidgetContext.Provider>
       </Wrapper>
     );
   }

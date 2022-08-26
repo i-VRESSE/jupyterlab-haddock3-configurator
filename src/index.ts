@@ -17,6 +17,7 @@ const FACTORY = 'Haddock3 configurator factory';
 
 const activate = (
   app: JupyterFrontEnd,
+  paths: JupyterFrontEnd.IPaths,
   browserFactory: IFileBrowserFactory,
   palette: ICommandPalette,
   restorer: ILayoutRestorer,
@@ -27,6 +28,8 @@ const activate = (
   const tracker = new WidgetTracker<H3cDocumentWidget>({
     namespace: 'h3c'
   });
+
+  console.log(paths.urls);
 
   if (restorer) {
     restorer.restore(tracker, {
@@ -42,6 +45,7 @@ const activate = (
     defaultFor: ['haddock3-config']
   });
   factory.setManager(browserFactory.defaultBrowser.model.manager);
+  factory.setBaseUrl(paths.urls.base);
 
   factory.widgetCreated.connect((sender, widget) => {
     widget.title.iconClass = 'jp-MaterialIcon jp-ListIcon';
@@ -124,7 +128,12 @@ const plugin: JupyterFrontEndPlugin<void> = {
   id: pluginId,
   autoStart: true,
   optional: [ISettingRegistry, ILauncher],
-  requires: [IFileBrowserFactory, ICommandPalette, ILayoutRestorer],
+  requires: [
+    JupyterFrontEnd.IPaths,
+    IFileBrowserFactory,
+    ICommandPalette,
+    ILayoutRestorer
+  ],
   activate
 };
 

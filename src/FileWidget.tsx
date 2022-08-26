@@ -1,9 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { WidgetProps, Widget, utils } from '@rjsf/core';
 import { FileDialog } from '@jupyterlab/filebrowser';
-import { DocManagerContext } from './DocManagerContext';
+import { FileWidgetContext } from './FileWidgetContext';
 import { Contents } from '@jupyterlab/services';
 import { dataURL2filename } from '@i-vresse/wb-core/dist/dataurls';
+import { URLExt } from '@jupyterlab/coreutils';
 
 function addNameToDataURL(dataURL: string, name: string) {
   return dataURL.replace(';base64', `;name=${encodeURIComponent(name)};base64`);
@@ -29,7 +30,7 @@ function processBlob(blob: Blob): Promise<string> {
 
 export const FileWidget: Widget = props => {
   const [name, setName] = useState(props.value as string);
-  const manager = useContext(DocManagerContext);
+  const context = useContext(FileWidgetContext);
   const { uiSchema } = props;
 
   async function handleClick(
@@ -37,9 +38,10 @@ export const FileWidget: Widget = props => {
   ) {
     e.stopPropagation();
 
-    if (manager === undefined) {
+    if (context === undefined) {
       return;
     }
+    const { manager, baseUrl } = context;
 
     const filter = dialogFilter(uiSchema);
     const { value: files } = await FileDialog.getOpenFiles({ manager, filter });
@@ -47,7 +49,7 @@ export const FileWidget: Widget = props => {
       return;
     }
     const file = files[0];
-    const dataUrl = await file2dataurl(file.path);
+    const dataUrl = await file2dataurl(file.path, baseUrl);
     props.onChange(dataUrl);
   }
 
@@ -69,9 +71,9 @@ export const FileWidget: Widget = props => {
     </div>
   );
 };
-async function file2dataurl(path: string) {
+async function file2dataurl(path: string, baseUrl: string) {
   // TODO current url expects Jupyter Lab to run at /, should be more generic
-  const url = '/files/' + path;
+  const url = URLExt.join(baseUrl, 'files', path);
   const resp = await fetch(url);
   const blob = await resp.blob();
   const dataUrl = await processBlob(blob);
