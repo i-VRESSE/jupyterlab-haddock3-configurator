@@ -83,7 +83,6 @@ jobs:
           repository: haddocking/haddock3
       - name: Create content dir by copying some haddock3 examples
         run: |
-          mkdir lite/content
           cp -r haddock3/examples/data lite/content/
           cp -r haddock3/examples/docking-protein-ligand lite/content/
       - name: Build the JupyterLite site
