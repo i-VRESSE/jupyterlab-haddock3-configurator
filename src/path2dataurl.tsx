@@ -1,6 +1,6 @@
 import { ContentsManager } from '@jupyterlab/services';
 
-export async function path2dataurl(path: string) {
+export async function path2dataurl(path: string): Promise<string> {
   const contents = new ContentsManager();
   const file = await contents.get(path);
   if (file.type === 'file' && file.format === 'text') {

@@ -20,10 +20,7 @@ export class H3cFactory extends ABCWidgetFactory<
     }
     return new H3cDocumentWidget({
       context,
-      content: new Haddock3ConfiguratorWidget(
-        context,
-        this._manager
-      )
+      content: new Haddock3ConfiguratorWidget(context, this._manager)
     });
   }
 
