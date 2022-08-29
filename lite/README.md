@@ -54,12 +54,3 @@ Host it
 ```shell
 python3 -m http.server --directory _site 8888
 ```
-
-Goto [http://0.0.0.0:8888/](http://0.0.0.0:8888/).
-
-## TODO
-
-- [ ] Deploy to GH pages, untested workflow at .github/workflows/pages.yml
-- Test file upload within extension when hosted on (likely will fail due to hardcoded path at src/FileWidget.tsx:74)
-  - [ ] /
-  - [ ] /jupyterlab-haddock3-configurator
