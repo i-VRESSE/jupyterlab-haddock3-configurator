@@ -11,7 +11,6 @@ Features:
 
 Quirks:
 
-- Opening existing config file will not parse PDB files so parameters which are molecule aware are empty
 - To save press save button followed by CTRL-s
 
 ![Image](screenshot.png)

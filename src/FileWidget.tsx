@@ -4,7 +4,7 @@ import { FileDialog } from '@jupyterlab/filebrowser';
 import { FileWidgetContext } from './FileWidgetContext';
 import { Contents } from '@jupyterlab/services';
 import { dataURL2filename } from '@i-vresse/wb-core/dist/dataurls';
-import { ContentsManager } from '@jupyterlab/services';
+import { path2dataurl } from './path2dataurl';
 
 export const FileWidget: Widget = props => {
   const [name, setName] = useState(props.value as string);
@@ -57,17 +57,6 @@ export const FileWidget: Widget = props => {
     </div>
   );
 };
-async function path2dataurl(path: string) {
-  const contents = new ContentsManager();
-  const file = await contents.get(path);
-  if (file.type === 'file' && file.format === 'text') {
-    const content64 = btoa(file.content);
-    const dataUrl = `data:${file.mimetype};name=${path};base64,${content64}`;
-    return dataUrl;
-  }
-  return path;
-}
-
 function dialogFilter(uiSchema: WidgetProps['uiSchema']) {
   const uiOptions = utils.getUiOptions(uiSchema);
   let filter: (value: Contents.IModel) => boolean = () => true;
