@@ -1,6 +1,6 @@
 {
   "name": "jupyterlab-haddock3-configurator",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Edit haddock3 config file",
   "keywords": [
     "jupyter",

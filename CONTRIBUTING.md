@@ -63,13 +63,13 @@ There is a single [CHANGELOG.md](CHANGELOG.md) that is for consumers of the pack
 
 1. Set version in `packages/core/package.json` with `yarn workspace @i-vresse/wb-core version <patch|minor|major>`
 2. Add changes to [CHANGELOG.md](CHANGELOG.md) and push changes to main branch
-3. Make sure you are logged see step 3 in  chapter above.
+3. Make sure you are logged see step 3 in chapter above.
 4. Clean `dist/` with `yarn workspace @i-vresse/wb-core clean`, make sure `yarn dev` is not running
 5. Build with `yarn workspace @i-vresse/wb-core build`
 6. Publish with `yarn workspace @i-vresse/wb-core npm publish --otp <otp code>`
 7. Create git tag for version with `git tag @i-vresse/wb-core@${packages/core/package.json:version}` and `git push origin --tags`
 
-The `@i-vresse/wb-core` depends on `@i-vresse/wb-form`. 
+The `@i-vresse/wb-core` depends on `@i-vresse/wb-form`.
 To use the core package outside this monorepo make sure the version of the form package it needs has been published.
 
 ### Publish repository

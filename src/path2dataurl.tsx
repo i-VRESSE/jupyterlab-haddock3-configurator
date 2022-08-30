@@ -22,6 +22,7 @@ export async function path2dataurl(
       return addNameToDataURL(dataUrl, path);
     } catch (error) {
       // Try IndexedDB for Jupyterlite virtual files
+      // TODO fetch db name from PageConfig instead of hardcoding
       const database = await openIndexedDb('JupyterLite Storage');
       const file = await fileFromIndexedDb(database, path);
       return model2dataurl(path, file);

@@ -2,7 +2,7 @@
 
 [![Github Actions Status](https://github.com/i-VRESSE/jupyterlab-haddock3-configurator/workflows/Build/badge.svg)](https://github.com/i-VRESSE/jupyterlab-haddock3-configurator/actions/workflows/build.yml)[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/i-VRESSE/jupyterlab-haddock3-configurator/main?urlpath=lab)
 
-Edit haddock3 config file in Jupyter Lab.
+Edit [haddock3](https://github.com/haddocking/haddock3) config file in [Jupyter Lab]().
 
 Features:
 
@@ -26,7 +26,7 @@ See running in JupyterLite at [https://i-vresse.github.io/jupyterlab-haddock3-co
 To install the extension, execute:
 
 ```bash
-pip install haddock3_configurator
+pip install https://github.com/i-VRESSE/jupyterlab-haddock3-configurator/releases/download/v0.1.1/haddock3_configurator-0.1.1-py3-none-any.whl
 ```
 
 ## Uninstall
