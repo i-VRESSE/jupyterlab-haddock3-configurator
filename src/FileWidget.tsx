@@ -27,7 +27,7 @@ export const FileWidget: Widget = props => {
       return;
     }
     const file = files[0];
-    const dataUrl = await path2dataurl(file.path);
+    const dataUrl = await path2dataurl(file.path, context.base);
     props.onChange(dataUrl);
   }
 

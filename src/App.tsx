@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 
 import {
   CatalogPanel,
@@ -32,6 +32,7 @@ import { toast } from 'react-toastify';
 import { FileWidget } from './FileWidget';
 import catalogJSON from './haddock3.guru.json';
 import { path2dataurl } from './path2dataurl';
+import { FileWidgetContext } from './FileWidgetContext';
 
 function App({
   onSave,
@@ -40,6 +41,7 @@ function App({
   onSave: (content: string) => void;
   content: string;
 }): JSX.Element {
+  const context = useContext(FileWidgetContext);
   const setCatalog = useSetCatalog();
   useEffect(() => {
     setCatalog(prepareCatalog(catalogJSON)); // On mount configure catalog
@@ -72,7 +74,11 @@ function App({
         tomlSchema4global,
         tomlSchema4nodes
       );
-      const globalWithFiles = await injectFiles(global, catalog.global.schema);
+      const globalWithFiles = await injectFiles(
+        global,
+        catalog.global.schema,
+        context?.base ?? ''
+      );
 
       setGlobal(globalWithFiles);
 
@@ -82,7 +88,8 @@ function App({
         selectNode(i);
         const nodeParametersWithFiles = await injectFiles(
           n.parameters,
-          schema4nodes[n.type]
+          schema4nodes[n.type],
+          context?.base ?? ''
         );
         setNode(nodeParametersWithFiles);
         i++;
@@ -121,7 +128,11 @@ function App({
 }
 export default App;
 
-async function injectFiles(parameters: IParameters, schema: JSONSchema7) {
+async function injectFiles(
+  parameters: IParameters,
+  schema: JSONSchema7,
+  base: string
+) {
   if (!schema.properties) {
     return parameters;
   }
@@ -159,14 +170,14 @@ async function injectFiles(parameters: IParameters, schema: JSONSchema7) {
       !propValue.startsWith('data:')
     ) {
       // handle p[k] = 'bla.pdb'
-      const newPropValue = await path2dataurl(propValue);
+      const newPropValue = await path2dataurl(propValue, base);
       newParameters[propKey] = newPropValue;
     } else if (isUriArraySchema && Array.isArray(propValue)) {
       // handle p[k] = ['bla.pdb']
       const newItems = [];
       for (const item of propValue) {
         if (typeof item === 'string' && !item.startsWith('data:')) {
-          const newItem = await path2dataurl(item);
+          const newItem = await path2dataurl(item, base);
           newItems.push(newItem);
         } else {
           newItems.push(item);

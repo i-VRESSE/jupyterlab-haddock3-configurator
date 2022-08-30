@@ -24,7 +24,7 @@ python -m pip install -r lite/requirements.txt
 Install extension
 
 ```shell
-pip install haddock3_configurator*.whl
+pip install ../dist/haddock3_configurator*.whl
 ```
 
 Fill content with example cfg

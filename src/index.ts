@@ -29,8 +29,6 @@ const activate = (
     namespace: 'h3c'
   });
 
-  console.log(paths.urls);
-
   if (restorer) {
     restorer.restore(tracker, {
       command: 'docmanager:open',
@@ -45,6 +43,7 @@ const activate = (
     defaultFor: ['haddock3-config']
   });
   factory.setManager(browserFactory.defaultBrowser.model.manager);
+  factory.setBase(paths.urls.base);
 
   factory.widgetCreated.connect((sender, widget) => {
     widget.title.iconClass = 'jp-MaterialIcon jp-ListIcon';
