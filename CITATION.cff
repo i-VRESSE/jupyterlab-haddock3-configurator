@@ -14,5 +14,11 @@ authors:
     orcid: 'https://orcid.org/0000-0002-5821-2060'
 repository-code: 'https://github.com/i-VRESSE/jupyterlab-haddock3-configurator'
 abstract: >-
-  Jupter Lab extension to create/edit haddock3 configuratiion file.
+  Jupter Lab extension to create/edit haddock3 configuration file.
 license: Apache-2.0
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.7034466
+    description: >-
+      This DOI represents all versions, and will
+      always resolve to the latest one.

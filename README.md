@@ -1,6 +1,8 @@
 # haddock3_configurator
 
 [![Github Actions Status](https://github.com/i-VRESSE/jupyterlab-haddock3-configurator/workflows/Build/badge.svg)](https://github.com/i-VRESSE/jupyterlab-haddock3-configurator/actions/workflows/build.yml)[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/i-VRESSE/jupyterlab-haddock3-configurator/main?urlpath=lab)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7034466.svg)](https://doi.org/10.5281/zenodo.7034466)
+[![fair-software.eu](https://img.shields.io/badge/fair--software.eu-%E2%97%8F%20%20%E2%97%8F%20%20%E2%97%8B%20%20%E2%97%8F%20%20%E2%97%8B-orange)](https://fair-software.eu)
 
 Edit [haddock3](https://github.com/haddocking/haddock3) config file in [Jupyter Lab]().
 
